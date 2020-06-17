@@ -1,8 +1,14 @@
-var restaurant={uncle_sams_pizza:{margerita_pizza:100,garlic_bread:50,white_pasta:70,cold_drink:30},babu_pav_bhaji:{pav_bhaji:70,pulav:70,extra_pav:40,bhaji_pav_sandwich:40},raj_sandwich:{bread_butter:20,bread_butter_grill:30,veg_sandwich:40,grill_veg_sandwich:60}}
-var temp=JSON.parse(localStorage.getItem("restaurant"));
-if(temp==null){
+var temp=localStorage.getItem("restaurant");
+
+console.log(temp);
+if(temp=='undefined'){
+    var restaurant={uncle_sams_pizza:{margerita_pizza:100,garlic_bread:50,white_pasta:70,cold_drink:30},babu_pav_bhaji:{pav_bhaji:70,pulav:70,extra_pav:40,bhaji_pav_sandwich:40},raj_sandwich:{bread_butter:20,bread_butter_grill:30,veg_sandwich:40,grill_veg_sandwich:60}}
     localStorage.setItem("restaurant",JSON.stringify(restaurant));
 }
+else{
+    var restaurant=JSON.parse(temp);
+}
+console.log(restaurant);
 var ressub=document.getElementById("ressub");
 ressub.addEventListener("click",addrestaurant);
 var object={}
@@ -13,16 +19,20 @@ function addrestaurant(){
     object={};
     tempres=resname;
     resinput.remove();
-    createinputforitems();
+    createinputforitems(resname);
 }
-function createinputforitems(){
+function createinputforitems(resname){
     var body=document.querySelector("body");
     var maindiv=document.createElement("div");
+    var greetings=document.createElement("h1");
+    greetings.textContent="Welcome: "+resname;
     var itemnamediv=document.createElement("h4");
     itemnamediv.textContent="Item Name: ";
     var itemnameinput=document.createElement("input");
     itemnameinput.setAttribute("type","text");
-    itemnameinput.setAttribute("id","itemname")
+    itemnameinput.setAttribute("id","itemname");
+    var itemvaluediv=document.createElement("h4");
+    itemvaluediv.textContent="Item Value: ";
     var itemvalueinput=document.createElement("input");
     itemvalueinput.setAttribute("type","number");
     itemvalueinput.setAttribute("id","itemvalue");
@@ -32,7 +42,7 @@ function createinputforitems(){
     var addres=document.createElement("button");
     addres.textContent="ADD RESTAURANT";
     addres.addEventListener("click",backtoaddres);
-    maindiv.append(itemnamediv,itemnameinput,itemvalueinput,itemsubmit,addres);
+    maindiv.append(greetings,itemnamediv,itemnameinput,itemvaluediv,itemvalueinput,itemsubmit,addres);
     body.append(maindiv);
 }
 

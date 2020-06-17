@@ -1,5 +1,14 @@
-var restaurant={uncle_sams_pizza:{margerita_pizza:100,garlic_bread:50,white_pasta:70,cold_drink:30},babu_pav_bhaji:{pav_bhaji:70,pulav:70,extra_pav:40,bhaji_pav_sandwich:40},raj_sandwich:{bread_butter:20,bread_butter_grill:30,veg_sandwich:40,grill_veg_sandwich:60}}
-var temp=JSON.parse(localStorage.getItem("restaurant"));
+var temp=localStorage.getItem("restaurant");
+
+console.log(temp);
+if(temp=='undefined'){
+    var restaurant={uncle_sams_pizza:{margerita_pizza:100,garlic_bread:50,white_pasta:70,cold_drink:30},babu_pav_bhaji:{pav_bhaji:70,pulav:70,extra_pav:40,bhaji_pav_sandwich:40},raj_sandwich:{bread_butter:20,bread_butter_grill:30,veg_sandwich:40,grill_veg_sandwich:60}}
+    localStorage.setItem("restaurant",JSON.stringify(restaurant));
+}
+else{
+    var restaurant=JSON.parse(temp);
+}
+console.log(restaurant);
 var totalbilltemp=JSON.parse(localStorage.getItem("totalbill"));
 if(totalbilltemp!=null){
     var totalbillarray=totalbilltemp;
@@ -16,7 +25,8 @@ if(temp==null){
 }
 var body=document.querySelector("body");
 var divbill=document.createElement("div");
-window.onload(function(){
+window.addEventListener("load",initialize);
+function initialize(){
     var div1=document.createElement("div");
     div1.setAttribute("id","id0")
     var counter=1;
@@ -29,12 +39,17 @@ window.onload(function(){
         div1.append(number,item,break1);
         counter++;
     }
+    div1.addEventListener("click",additems);
     body.append(div1);
-})
-body.addEventListener("click",additems);
+    
+}
+
 function additems(e){
     var div1=document.getElementById("id0");
     div1.textContent="";
+    var div2=document.createElement("div");
+    div2.setAttribute("id","id2")
+    body.append(div2);
     var temp=e.target.textContent;
     var ourtemp=restaurant[temp];
     var counter=1;
@@ -51,19 +66,20 @@ function additems(e){
         addtocart.textContent="addtobill";
         addtocart.addEventListener("click",makingbill);
         var break1=document.createElement("br");
-        div1.append(number,itemname,itemvalue,quantity,addtocart,break1);
+        div2.append(number,itemname,itemvalue,quantity,addtocart,break1);
     }
     body.append(divbill);
     var totalbill=document.createElement("button");
     totalbill.textContent="Make bill";
     totalbill.setAttribute("id","makebill");
     totalbill.addEventListener("click",finalbill);
-    divbill.append(totalbill);
+    body.append(totalbill);
 }
 function makingbill(e){
-    var temp1=e.target.previousSibling.textContent;
+    var temp1=e.target.previousSibling.value;
     var temp2=e.target.previousSibling.previousSibling.textContent;
     var temp3=e.target.previousSibling.previousSibling.previousSibling.textContent;
+    console.log(temp1,temp2,temp3);
     var tempdiv=document.createElement("div");
     var number=document.createElement("span")
     number.textContent=totalbillcounter;
@@ -74,26 +90,31 @@ function makingbill(e){
     value.textContent=temp2;
     var quantity=document.createElement("span");
     quantity.textContent=temp1;
-    totalbillarray[totalbillarray.length-1].push([name,value,quantity]);
+    totalbillarray[totalbillarray.length-1].push([temp3,temp2,temp1]);
     tempdiv.append(number,name,value,quantity);
+    
     var totalbill=document.getElementById("makebill");
-    tempbill.insertBefore(totalbill);
+    body.insertBefore(tempdiv,totalbill);
 }
 function finalbill(){
     var temp=totalbillarray[totalbillarray.length-1];
     var sum1=0;
     var itemscount=0;
     for(var i=0;i<temp.length;i++){
-        sum1+=Number(temp[i][1])*Number(temp[i][2]);
+        sum1+=(Number(temp[i][1])*Number(temp[i][2]));
         itemscount+=1;
+        console.log(temp[i][1],temp[i][2],sum1);
     }
     var tempdate=new Date();
     var ourdate=tempdate.getDate();
-    totalbillarray[totalbillarray.length-1].push([ourdate,sum1,itemscount]);
+    var ourmonth=tempdate.getMonth();
+    var ouryear=tempdate.getFullYear();
+    var totaldate=ourdate.toString()+"/"+ourmonth.toString()+"/"+ouryear.toString();
+    totalbillarray[totalbillarray.length-1].push([totaldate,sum1,itemscount]);
     localStorage.setItem("totalbill",JSON.stringify(totalbillarray));
-    var totalbill=document.getElementById("makebill");
     var finalbilldisplay=document.createElement("div");
-    finalbilldisplay.textContent="Total bill is"+sum1+"total "
+    finalbilldisplay.textContent="Total bill is "+sum1+"total items "+itemscount;
+    body.append(finalbilldisplay);
 }
 var addres=document.getElementById("addres");
 addres.addEventListener("click",addrescall);
