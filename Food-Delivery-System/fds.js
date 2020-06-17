@@ -22,28 +22,42 @@ function addrestaurant(){
     createinputforitems(resname);
 }
 function createinputforitems(resname){
+    var div0=document.createElement("div");
+    div0.setAttribute("id","id0");
+    div0.setAttribute("class","container text-white bg-info");
+    div0.style.marginTop="200px";
+    var div1=document.createElement("div");
+    div1.setAttribute("class","row mt-5 p-3");
     var body=document.querySelector("body");
     var maindiv=document.createElement("div");
     var greetings=document.createElement("h1");
+    greetings.setAttribute("class","col-12 text-center");
     greetings.textContent="Welcome: "+resname;
     var itemnamediv=document.createElement("h4");
+    itemnamediv.setAttribute("class","col-2 ")
     itemnamediv.textContent="Item Name: ";
     var itemnameinput=document.createElement("input");
+    itemnameinput.setAttribute("class","col-1 ");
     itemnameinput.setAttribute("type","text");
     itemnameinput.setAttribute("id","itemname");
     var itemvaluediv=document.createElement("h4");
+    itemvaluediv.setAttribute("class","col-2 ");
     itemvaluediv.textContent="Item Value: ";
     var itemvalueinput=document.createElement("input");
+    itemvalueinput.setAttribute("class","col-1 ");
     itemvalueinput.setAttribute("type","number");
     itemvalueinput.setAttribute("id","itemvalue");
     var itemsubmit=document.createElement("button");
+    itemsubmit.setAttribute("class","col-2 btn btn-primary offset-1");
     itemsubmit.textContent="SUBMIT";
     itemsubmit.addEventListener("click",takeitemsinput);
     var addres=document.createElement("button");
-    addres.textContent="ADD RESTAURANT";
+    addres.setAttribute("class","col-2 btn btn-primary offset-1")
+    addres.textContent="ADD ALL ITEMS";
     addres.addEventListener("click",backtoaddres);
-    maindiv.append(greetings,itemnamediv,itemnameinput,itemvaluediv,itemvalueinput,itemsubmit,addres);
-    body.append(maindiv);
+    div1.append(greetings,itemnamediv,itemnameinput,itemvaluediv,itemvalueinput,itemsubmit,addres);
+    div0.append(div1);
+    body.append(div0);
 }
 
 function takeitemsinput(){

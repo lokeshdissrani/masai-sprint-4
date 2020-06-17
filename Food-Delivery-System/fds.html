@@ -5,24 +5,26 @@
         <script src="https://kit.fontawesome.com/6f49f822dc.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body>
-        <h1 class="text-center" id="header">Welcome to add your Restaurant</h1>
-        
-        <div class="container" id="resinput">
-            <div class="row">
-                <div class="col-4">
-                    <button id="selres">Select restaurant</button>
-                    <button id="summary">Summary</button>
+    <body class="bg-secondary">
+        <div class="container text-white bg-info" id="resinput" style="margin-top: 200px;">
+            <h1 class="text-center" id="header" >Welcome to add your Restaurant</h1>
+            <div class="row mt-5">
+                <div class="col-2 offset-3">
+                    <button type="button" id="selres" class="btn btn-primary">Select restaurant</button>
                 </div>
-                <div class="col-4">
-                    Name:<input type="text" id="resname">
+                <div class="col-2">
+                    <button type="button" id="summary" class="btn btn-primary">Summary</button>
                 </div>
-                <div class="col-4">
-                    <button type="button" id="ressub">SUBMIT</button>
+            </div>
+            <div class="row mt-5">
+                <div class="col-4 offset-3">
+                    <h5>Name:<input type="text" id="resname"></h5>
+                </div>
+                <div class="col-1">
+                    <button type="button" id="ressub" class="btn btn-success">SUBMIT</button>
                 </div>
             </div>
         </div>
-
         <script src="fds.js"></script>
     </body>
 </html>
