@@ -16,11 +16,12 @@ for(var i=0;i<temp.length;i++){
     ourtemp=temp[i];
     var maindiv=document.createElement("div");
     var date1=ourtemp[ourtemp.length-1][0];
-    var sum1=ourtemp[ourtemp.length-1][1];
-    var totalitems1=ourtemp[ourtemp.length-1][2];
-    var mainheading=document.createElement("h1");
+    var res1=ourtemp[ourtemp.length-1][1]
+    var sum1=ourtemp[ourtemp.length-1][2];
+    var totalitems1=ourtemp[ourtemp.length-1][3];
+    var mainheading=document.createElement("h3");
     mainheading.setAttribute("class","col-12");
-    mainheading.textContent=(i+1)+". Date: "+date1+" Total Sum of bill: "+sum1+" Total Items: "+totalitems1;
+    mainheading.textContent=(i+1)+". Date: "+date1+" Restaurant: "+res1+" Total Sum of bill: "+sum1+" Total Items: "+totalitems1;
     div1.append(mainheading);
     ourbody.append(div1);
     var div1=document.createElement("div");

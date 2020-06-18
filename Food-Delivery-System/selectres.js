@@ -1,8 +1,7 @@
-
 var temp=localStorage.getItem("restaurant");
-
+var current_restauant;
 console.log(temp);
-if(temp=='undefined'){
+if(temp=='null'){
     var restaurant={uncle_sams_pizza:{margerita_pizza:100,garlic_bread:50,white_pasta:70,cold_drink:30},babu_pav_bhaji:{pav_bhaji:70,pulav:70,extra_pav:40,bhaji_pav_sandwich:40},raj_sandwich:{bread_butter:20,bread_butter_grill:30,veg_sandwich:40,grill_veg_sandwich:60}}
     localStorage.setItem("restaurant",JSON.stringify(restaurant));
 }
@@ -59,6 +58,7 @@ function additems(e){
     div2.setAttribute("class","container text-white bg-info")
     body.append(div2);
     var temp=e.target.textContent;
+    current_restauant=temp;
     var ourtemp=restaurant[temp];
     var counter=1;
     for(a in ourtemp){
@@ -140,7 +140,7 @@ function finalbill(){
     var ourmonth=tempdate.getMonth();
     var ouryear=tempdate.getFullYear();
     var totaldate=ourdate.toString()+"/"+ourmonth.toString()+"/"+ouryear.toString();
-    totalbillarray[totalbillarray.length-1].push([totaldate,sum1,itemscount]);
+    totalbillarray[totalbillarray.length-1].push([totaldate,current_restauant,sum1,itemscount]);
     localStorage.setItem("totalbill",JSON.stringify(totalbillarray));
     var finalbilldisplay=document.createElement("div");
     finalbilldisplay.setAttribute("class","col-12 display-2");

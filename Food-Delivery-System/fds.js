@@ -1,7 +1,7 @@
 var temp=localStorage.getItem("restaurant");
 
 console.log(temp);
-if(temp=='undefined'){
+if(temp=='null'){
     var restaurant={uncle_sams_pizza:{margerita_pizza:100,garlic_bread:50,white_pasta:70,cold_drink:30},babu_pav_bhaji:{pav_bhaji:70,pulav:70,extra_pav:40,bhaji_pav_sandwich:40},raj_sandwich:{bread_butter:20,bread_butter_grill:30,veg_sandwich:40,grill_veg_sandwich:60}}
     localStorage.setItem("restaurant",JSON.stringify(restaurant));
 }
